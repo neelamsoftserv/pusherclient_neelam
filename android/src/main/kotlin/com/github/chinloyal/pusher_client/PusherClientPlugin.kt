@@ -13,7 +13,9 @@ class PusherClientPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel: MethodChannel
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "pusher_client")
+    val channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.github.chinloyal/pusher_client")
+    val streamChannel = EventChannel(flutterPluginBinding.binaryMessenger, "com.github.chinloyal/pusher_client_stream")
+    streamChannel.setStreamHandler(this)
     channel.setMethodCallHandler(this)
   }
 
